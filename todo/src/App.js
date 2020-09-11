@@ -1,11 +1,19 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 import Todo from './Todo'
 import './App.css';
+import db from './firebase'
 function App() {
-  const [todos, setTodos]=useState(['cool Bro','Chill Bro','🌭 I love food']);
+  const [todos, setTodos]=useState([]);
   const [input, setInput]=useState('');
   console.log(input);
+  useEffect(() => {
+    console.log("I ran when the component loaded");
+
+    db.collection("todos").onSnapshot((snapshot) => {
+      setTodos(snapshot.docs.map((doc) => doc.data().todo));
+    });
+  }, []);
   const addTodo=(Event)=>{
     
     //this will fire off when we click the Button
