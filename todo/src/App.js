@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
-
+import Todo from './Todo'
 import './App.css';
 function App() {
   const [todos, setTodos]=useState(['cool Bro','Chill Bro','🌭 I love food']);
@@ -28,11 +28,12 @@ Event.preventDefault();
       </form>
       <ul>
         {todos.map(todo =>(
-          <li>{todo}</li>
+           <Todo text={todo}/>
+          // <li>{todo}</li>
         ))}
       </ul>
+     
     </div>
   )
 }
-
 export default App
